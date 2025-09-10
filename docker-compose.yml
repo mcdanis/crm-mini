@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: crm_app
+    volumes:
+      - ./public:/var/www/html
+    ports:
+      - "8888:80"
+    depends_on:
+      - db
+    networks:
+      - crm_network
+
+  db:
+    image: mysql:8.0
+    container_name: crm_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: crm_app
+      MYSQL_USER: crm_user
+      MYSQL_PASSWORD: crm_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3337:3306"
+    networks:
+      - crm_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: crm_phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - crm_network
+
+volumes:
+  db_data:
+
+networks:
+  crm_network:
