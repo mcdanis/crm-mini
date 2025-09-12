@@ -1,0 +1,66 @@
+saya ingin membuat aplikasi CRM mini dengan php native + vanila js
+
+Menu
+    - Dashboard
+        menampilkan report dalam bentuk angka dan persentasi perbandingan dengan kemarin
+            - total orders
+            - revenue
+            - new customers
+            - customer retention rate
+        
+        menampilkan list singkat on going service, service atau jasa yang masih berjalan
+        monthly revenus setiap bulannya dalam bentuk grafik dan 
+        recent activities alias pesanan service akhir-akhir ini
+
+    - Customer
+        menampilkan list data pelanggan
+        bisa menambah pelanggan
+        bisa import/export kontak/pelanggan 
+    
+    - Order
+        bisa tambah order baru
+        daftar list order 
+    
+    - Report 
+        General report (pendapatan, order, pelanggan, dari mana saja datangnya)
+        Leaderboard (data custom yang tampilin paling banyak order, )
+        Export Laporan
+        Next best task (buatkan fitur rekomendasi aksi untuk setiap kontak top 20 customer)
+
+Tambahan info:
+ini isi Form Order yang saya inginkan
+    - existing customer (pilih dropdown ini jika orderan dari user sudah ada)
+    - field ini akan terisi jika di pilih dropdown, jika tidak tinggal isi sendiri dan ini termasuk new kontak + new orderan. field nya
+        - nama lengkap
+        - email
+        - no telp
+        - nama perusahaan/instansi
+        - dropdown pilih jasa 
+        - note
+        - price (disable)
+        - custom price (bisa di isi jika orderan ini harga khusus naik atau turun)
+        - date untuk tanggal order kapan
+
+form data customer
+    - nama lengkap
+    - email
+    - no telp
+    - address
+    - suburb
+    - state
+    - postcode
+    - note 
+
+
+fitur detail kontak
+    jika kontak di lihat detail maka bisa melihat history order kontak, selama ini dia sudah order berapa kali, berapa total spent uang ke jasa kita dan berapa kali menghubungi dan bisa melihat dan mencatat interakhir telp, chat, email dll pada halaman detail kontak
+
+
+
+--
+
+itu garis besar aplikasi crm saya, tolong buatkan desain tabel dalam bentuk kode mysql langsung. 
+
+sebelum menjawab jika ada pertanyaan atau konfirmasi fitur atau hal apapun silahkan, supaya desain tabel lebih bagus. jika anda ingin menyarankan juga silahakan.
+
+note: aplikasi ini target saya umkm bisnis di local dan luar negeri, jadi pastikan nama field kolom tabel menggunakan bahasa inggris
