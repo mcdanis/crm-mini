@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Pastikan public file (css/js/gambar) tetap bisa diakses
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Semua request selain file langsung masuk ke index.php
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
