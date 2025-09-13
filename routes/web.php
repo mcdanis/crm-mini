@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Controllers\ServiceController;
 
 $router->get('', 'AuthController@accessChecker');
 
@@ -31,9 +32,19 @@ $router->get('report', 'ReportController@index');
 // user
 $router->get('user/profile', 'UserController@index');
 
-$router->get('order/create', function () {
-    echo "Form buat Order";
+// API User
+$router->post('api/user/profile/update', 'UserController@updateProfile');
+$router->post('api/user/profile-password/update', 'UserController@updatePassword');
+
+// API Service
+$router->post('api/service/create', 'ServiceController@createService');
+$router->post('api/service/update', 'ServiceController@updateService');
+$router->get('api/service/delete/{id}', function ($id) {
+    (new ServiceController)->deleteService($id);
 });
+
+
+// 
 
 $router->get('profile/{id}', function ($id) {
     $user = User::find($id);

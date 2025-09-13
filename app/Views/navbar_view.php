@@ -60,7 +60,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-white fw-semibold" href="/service/list">
-                        <i class="bi bi-gear-fill me-1"></i> Service
+                        <i class="bi bi-wrench"></i> Service
                     </a>
                 </li>
 

@@ -370,6 +370,9 @@ $lang_id = [
     "about" => "Tentang",
     "privacy_policy" => "Kebijakan Privasi",
     "terms_of_service" => "Syarat Layanan",
+
+    // setting
+    "status" => "Status",
 ];
 
 // English Language Pack
@@ -567,6 +570,11 @@ $lang_en = [
     "about" => "About",
     "privacy_policy" => "Privacy Policy",
     "terms_of_service" => "Terms of Service",
+
+    // setting
+    "status" => "Status",
+    "user_role" => "Role",
+
 ];
 
 class LanguageManager

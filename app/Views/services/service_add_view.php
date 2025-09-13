@@ -8,27 +8,41 @@
     </div>
 
     <div class="dashboard-section p-4">
-        <form>
+        <?php if (isset($_GET['danger'])): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <?php echo htmlspecialchars(urldecode($_GET['danger'])); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <?php echo htmlspecialchars(urldecode($_GET['success'])); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
+        <form action="/api/service/create" method="POST">
             <div class="row g-4">
                 <!-- Nama Layanan -->
                 <div class="col-md-6">
-                    <label for="serviceName" class="form-label fw-semibold">Nama Layanan <span class="text-danger">*</span></label>
+                    <label for="serviceName" class="form-label fw-semibold"><?= t('service_name') ?> <span class="text-danger">*</span></label>
                     <input
                         type="text"
                         class="form-control"
                         id="serviceName"
                         name="name"
                         maxlength="200"
-                        required
-                        placeholder="Masukkan nama layanan">
-                    <div class="form-text">Maksimal 200 karakter.</div>
+                        required>
+                    <div class="form-text">Max 200 character.</div>
                 </div>
 
                 <!-- Harga Default -->
                 <div class="col-md-6">
-                    <label for="defaultPrice" class="form-label fw-semibold">Harga Default <span class="text-danger">*</span></label>
+                    <label for="defaultPrice" class="form-label fw-semibold"><?= t('default_price') ?> <span class="text-danger">*</span></label>
                     <div class="input-group">
-                        <span class="input-group-text">Rp</span>
+                        <span class="input-group-text">$</span>
                         <input
                             type="number"
                             class="form-control"
@@ -40,18 +54,16 @@
                             required
                             placeholder="0.00">
                     </div>
-                    <div class="form-text">Harga dalam Rupiah (Rp), minimal 0.</div>
                 </div>
 
                 <!-- Deskripsi -->
                 <div class="col-12">
-                    <label for="description" class="form-label fw-semibold">Deskripsi</label>
+                    <label for="description" class="form-label fw-semibold"><?= t('service_description') ?></label>
                     <textarea
                         class="form-control"
                         id="description"
                         name="description"
-                        rows="4"
-                        placeholder="Deskripsi layanan (opsional)"></textarea>
+                        rows="4"></textarea>
                 </div>
             </div>
 

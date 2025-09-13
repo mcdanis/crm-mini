@@ -13,7 +13,7 @@ class AuthController
     {
         // Redirect ke dashboard jika sudah login
         AuthHelper::redirectIfLoggedIn();
-        
+
         View::render('auth.login', [
             'title' => 'Login',
         ]);
@@ -29,7 +29,7 @@ class AuthController
     /**
      * Logic login dengan validasi dan cookie
      */
-    public function login() 
+    public function login()
     {
         // Cek apakah request method adalah POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -52,7 +52,7 @@ class AuthController
         $user = User::where('email', $email)->first();
 
         // Validasi user
-        
+
         if (!$user) {
             $this->redirectToLoginWithError('Email salah');
             return;
@@ -66,7 +66,7 @@ class AuthController
 
         // Verifikasi password
         if (md5($password) !== $user->password_hash) {
-            $this->redirectToLoginWithError('Password salah'. md5($password) .' - '. $user->password_hash);
+            $this->redirectToLoginWithError('Password salah' . md5($password) . ' - ' . $user->password_hash);
             return;
         }
 
@@ -81,7 +81,7 @@ class AuthController
         ]);
 
         // Set cookie
-        $this->setLoginCookie($token, 7); // Cookie berlaku 7 hari
+        $this->setLoginCookie($token . $user->id, 7); // Cookie berlaku 7 hari
 
         // Redirect ke dashboard
         header('Location: /dashboard');
@@ -154,7 +154,7 @@ class AuthController
     private function setLoginCookie($token, $days)
     {
         $expire = time() + ($days * 24 * 60 * 60); // Convert days to seconds
-        
+
         setcookie(
             'login_token',           // Nama cookie
             $token,                  // Value
@@ -199,7 +199,7 @@ class AuthController
 
         // Hapus cookie
         setcookie('login_token', '', time() - 3600, '/');
-        
+
         // Redirect ke halaman login
         header('Location: /login');
         exit();
