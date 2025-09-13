@@ -19,4 +19,11 @@ class CustomerController
             'title' => 'Customer List',
         ]);
     }
+
+    public function detail()
+    {
+        View::render('customers.customer_detail_view', [
+            'title' => 'Detail Customer of ',
+        ]);
+    }
 }

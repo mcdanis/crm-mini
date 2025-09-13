@@ -10,6 +10,7 @@ $router->get('dashboard', 'DashboardController@index');
 // customer
 $router->get('customer/add', 'CustomerController@add');
 $router->get('customer/list', 'CustomerController@index');
+$router->get('customer/detail', 'CustomerController@detail');
 
 // service
 $router->get('service/add', 'ServiceController@add');

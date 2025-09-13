@@ -15,7 +15,7 @@
         <!-- Stats Cards -->
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card d-flex justify-content-between align-items-center">
+                <div class="stat-card-standard d-flex justify-content-between align-items-center">
                     <div class="text">
                         <h6 class="text-muted mb-1">Total Orders</h6>
                         <h2 class="mb-1">1,248</h2>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card d-flex justify-content-between align-items-center">
+                <div class="stat-card-standard d-flex justify-content-between align-items-center">
                     <div class="text">
                         <h6 class="text-muted mb-1">Revenue</h6>
                         <h2 class="mb-1">$12,480</h2>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card d-flex justify-content-between align-items-center">
+                <div class="stat-card-standard d-flex justify-content-between align-items-center">
                     <div class="text">
                         <h6 class="text-muted mb-1">New Customer</h6>
                         <h2 class="mb-1">320</h2>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card d-flex justify-content-between align-items-center">
+                <div class="stat-card-standard d-flex justify-content-between align-items-center">
                     <div class="text">
                         <h6 class="text-muted mb-1">Customer Retention</h6>
                         <h2 class="mb-1">78%</h2>
