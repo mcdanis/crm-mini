@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends Model
 {
 	protected $fillable = [
-		'email', 'full_name', 'password_hash', 'role', 'is_active'
+		'email', 'full_name', 'password_hash', 'role', 'is_active', 'token', 'token_expire_at'
 	];
 
 	public function ordersCreated(): HasMany

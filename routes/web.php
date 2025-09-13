@@ -2,9 +2,12 @@
 
 use App\Models\User;
 
+$router->get('', 'AuthController@accessChecker');
+
 $router->get('login', 'AuthController@index');
 $router->get('forgot-password', 'AuthController@forgotPassword');
 
+// dashboard
 $router->get('dashboard', 'DashboardController@index');
 
 // customer
