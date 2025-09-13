@@ -25,15 +25,29 @@ class AuthHelper
             return false;
         }
 
-        // Validasi format token (bisa disesuaikan dengan format yang Anda gunakan)
-        if (!preg_match('/^[a-zA-Z0-9]{32,}$/', $token)) {
+        // Validasi format token
+        if (!preg_match('/^[a-f0-9]{32}$/', $token)) {
             return false;
         }
 
+        // Cari user berdasarkan token
         $user = User::where('token', $token)->first();
-        return $user !== null;
+        
+        if (!$user) {
+            return false;
+        }
 
-        return true; // Sementara return true jika token ada dan valid format
+        // Cek apakah token masih berlaku
+        if ($user->token_expire_at && strtotime($user->token_expire_at) < time()) {
+            // Token expired, hapus dari database
+            $user->update([
+                'token' => null,
+                'token_expire_at' => null
+            ]);
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -47,11 +61,8 @@ class AuthHelper
             return null;
         }
 
-        // TODO: Ambil user ID dari database berdasarkan token
-        // $user = User::where('login_token', $_COOKIE['login_token'])->first();
-        // return $user ? $user->id : null;
-
-        return 1; // Sementara return 1
+        $user = User::where('token', $_COOKIE['login_token'])->first();
+        return $user ? $user->id : null;
     }
 
     /**
@@ -65,15 +76,8 @@ class AuthHelper
             return null;
         }
 
-        // TODO: Ambil data user dari database
-        // $user = User::where('login_token', $_COOKIE['login_token'])->first();
-        // return $user ? $user->toArray() : null;
-
-        return [
-            'id' => 1,
-            'name' => 'Admin',
-            'email' => 'admin@example.com'
-        ]; // Sementara return data dummy
+        $user = User::where('token', $_COOKIE['login_token'])->first();
+        return $user ? $user->toArray() : null;
     }
 
     /**
