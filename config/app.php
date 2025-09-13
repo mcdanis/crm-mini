@@ -6,9 +6,9 @@
 
 // Load Composer autoload
 $autoloadPaths = [
+	__DIR__ . '/vendor/autoload.php',
 	__DIR__ . '/../vendor/autoload.php',
-	__DIR__ . '/../../vendor/autoload.php',
-	__DIR__ . '/../public/vendor/autoload.php',
+	__DIR__ . '/public/vendor/autoload.php',
 ];
 
 $autoloadLoaded = false;

@@ -5,7 +5,7 @@ use App\Models\User;
 
 $user = User::create(
   [
-    'email' => 'admin2@gmail.com',
+    'email' => 'admin3@gmail.com',
     'full_name' => 'Admin2',
     'password_hash' => md5('admin'),
     'role' => 'admin',
