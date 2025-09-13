@@ -1,8 +1,14 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\View;
+
 class DashboardController {
     public function index() {
-        echo "Halaman dHome";
+        $user = ['id' => 1, 'name' => 'Dani']; //
+        View::render('dashboard.home', [
+            'title' => 'Halaman Home',
+            'user'  => $user
+        ]);
     }
 }
