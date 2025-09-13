@@ -1,1 +1,60 @@
- 
+:root {
+  --bg-primary: red;
+}
+
+.bg-c-primary {
+  background-color: #1da4a1;
+}
+
+.btn-c-primary {
+  background-color: #167372;
+  color: white;
+}
+
+/* Membuat kolom kanan tinggi sama dengan dua kolom kiri */
+.right-col {
+  height: 412px; /* 200 + 200 + margin 2x 1rem ~ 12px */
+}
+@media (max-width: 767px) {
+  .right-col {
+    height: 200px; /* saat responsif berubah ke bawah */
+    margin-top: 1rem;
+  }
+}
+body {
+  background-color: #f0f2f5;
+}
+.stat-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 11%);
+  transition: transform 0.2s;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+.stat-card .icon svg {
+  color: #4b6cb7;
+}
+.btn-c-primary {
+  background-color: #4b6cb7;
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+.btn-c-primary:hover {
+  background-color: #3a53a0;
+}
+.dashboard-section {
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 11%);
+}
