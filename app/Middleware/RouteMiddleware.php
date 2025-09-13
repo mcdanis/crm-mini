@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Middleware;
+use App\Helpers\AuthHelper;
 
 class RouteMiddleware
 {

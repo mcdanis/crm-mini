@@ -13,7 +13,7 @@ return new class {
         
             if (!$schema->hasColumn($tableName, 'token')) {
 				$schema->table($tableName, function (Blueprint $table) {
-					$table->string('token', 30)->nullable()->after('email');
+					$table->string('token', 40)->nullable()->after('email');
                 });
             }
 			if (!$schema->hasColumn($tableName, 'token_expire_at')) {

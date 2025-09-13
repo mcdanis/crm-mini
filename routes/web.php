@@ -5,6 +5,8 @@ use App\Models\User;
 $router->get('', 'AuthController@accessChecker');
 
 $router->get('login', 'AuthController@index');
+$router->post('login', 'AuthController@login');
+$router->get('logout', 'AuthController@logout');
 $router->get('forgot-password', 'AuthController@forgotPassword');
 
 // dashboard
@@ -25,6 +27,9 @@ $router->get('order/list', 'OrderController@index');
 
 // report
 $router->get('report', 'ReportController@index');
+
+// user
+$router->get('user/profile', 'UserController@index');
 
 $router->get('order/create', function () {
     echo "Form buat Order";

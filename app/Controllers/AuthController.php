@@ -52,8 +52,9 @@ class AuthController
         $user = User::where('email', $email)->first();
 
         // Validasi user
+        
         if (!$user) {
-            $this->redirectToLoginWithError('Email atau password salah');
+            $this->redirectToLoginWithError('Email salah');
             return;
         }
 
@@ -64,8 +65,8 @@ class AuthController
         }
 
         // Verifikasi password
-        if (!password_verify($password, $user->password_hash)) {
-            $this->redirectToLoginWithError('Email atau password salah');
+        if (md5($password) !== $user->password_hash) {
+            $this->redirectToLoginWithError('Password salah'. md5($password) .' - '. $user->password_hash);
             return;
         }
 
