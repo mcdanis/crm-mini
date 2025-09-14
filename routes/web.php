@@ -29,12 +29,21 @@ $router->get('order/list', 'OrderController@index');
 // report
 $router->get('report', 'ReportController@index');
 
+// setting
+$router->get('settings', 'SettingController@index');
+
 // user
 $router->get('user/profile', 'UserController@index');
 
 // API User
+$router->post('api/user/create', 'UserController@create');
 $router->post('api/user/profile/update', 'UserController@updateProfile');
 $router->post('api/user/profile-password/update', 'UserController@updatePassword');
+$router->post('api/user/filters', 'UserController@filterUsers');
+$router->get('api/user/{status}/{id}', 'UserController@changeUserStatus');
+
+// API setting
+$router->post('api/setting/update', 'SettingController@updateSetting');
 
 // API Service
 $router->post('api/service/create', 'ServiceController@createService');

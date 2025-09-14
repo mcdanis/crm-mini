@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\User;
 use App\Helpers\UtilHelper;
+use App\Helpers\HtmlGenerateHelper;
+use App\Helpers\ResponseHelper;
+use App\Helpers\ValidationHelper;
 
 class UserController
 {
@@ -20,7 +23,7 @@ class UserController
 
     public function getUser($param, $column = 'token')
     {
-        $user = User::where($column, $_COOKIE['login_token'])->first();
+        $user = User::where($column, $param)->first();
         return $user;
     }
 
@@ -91,8 +94,104 @@ class UserController
             'password_hash' => $hashedPassword
         ]);
 
-
-
         return UtilHelper::redirectWithMessage('/user/profile', 'success', 'Your password has been updated successfully!');
+    }
+
+    public function filterUsers()
+    {
+        $filters = [
+            'name'      => $_POST['name']   ?? null,
+            'is_active' => $_POST['status'] ?? null,
+            'role'      => $_POST['role']   ?? null,
+        ];
+
+        $query = User::query();
+
+        $query->when(!empty($filters['role']), function ($q) use ($filters) {
+            $q->where('role', $filters['role']);
+        });
+
+        $query->when($filters['is_active'] !== null && $filters['is_active'] !== '', function ($q) use ($filters) {
+            $q->where('is_active', $filters['is_active']);
+        });
+
+        $query->when(!empty($filters['name']), function ($q) use ($filters) {
+            $q->where('full_name', 'like', '%' . $filters['name'] . '%');
+        });
+
+        // jalankan query
+        $users = $query->orderBy('created_at', 'desc')->get();
+
+        $html = '';
+
+        if ($users->isEmpty()) {
+            $html = '<tr><td colspan="5" class="text-center">No users found</td></tr>';
+        } else {
+            foreach ($users as $user) {
+                $badge = 'role-user';
+                $roleTitle = 'User';
+                if ($user->role === 'admin') {
+                    $badge = 'role-admin';
+                    $roleTitle = 'Admin';
+                }
+
+                $statusBadge = $user->is_active == 1
+                    ? '<span class="badge bg-success">Active</span>'
+                    : '<span class="badge bg-danger">Inactive</span>';
+
+                $html .= HtmlGenerateHelper::renderUserRow($user);
+            }
+        }
+
+        echo $html;
+    }
+
+    public function changeUserStatus($status, $id)
+    {
+        try {
+            if (!ValidationHelper::numeric($id)) {
+                echo ResponseHelper::failed('payload is not valid, try again later!');
+                die;
+            }
+            $this->getUser($id, 'id')->update([
+                'is_active' => $status
+            ]);
+            echo ResponseHelper::success('User has been deactivated!');
+        } catch (\Throwable $th) {
+            echo ResponseHelper::failed('User can not deactivated, try again later!' . $th->getMessage());
+        }
+    }
+
+    public function create()
+    {
+        if (!ValidationHelper::email($_POST['email'])) {
+            echo ResponseHelper::failed('Invalid Email!');
+            die;
+        }
+
+        if (!ValidationHelper::alpha($_POST['full_name'])) {
+            echo ResponseHelper::failed('Full name can only be alphabet!');
+            die;
+        }
+
+        if (!ValidationHelper::uniqueEmail($_POST['email'])) {
+            echo ResponseHelper::failed('Email already in use');
+            die;
+        }
+
+        try {
+            $randomString = random_int(1000000, 9999999);
+            User::create([
+                'full_name' => $_POST['full_name'],
+                'email' => $_POST['email'],
+                'role' => $_POST['role'],
+                'is_active' => $_POST['status'],
+                'password_hash' => md5($randomString)
+            ]);
+
+            echo ResponseHelper::success('User ' . $_POST['email'] . ' has been added!, the password <b>' . $randomString . '</b>. note it down and give it to the user. because the initial password will not appear again');
+        } catch (\Throwable $th) {
+            echo ResponseHelper::failed($th->getMessage());
+        }
     }
 }

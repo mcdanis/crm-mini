@@ -19,20 +19,15 @@ class AuthHelper
         }
 
         $token = $_COOKIE['login_token'];
-        
+
         // Validasi token tidak kosong
         if (empty($token)) {
             return false;
         }
 
-        // Validasi format token
-        if (!preg_match('/^[a-f0-9]{32}$/', $token)) {
-            return false;
-        }
-
         // Cari user berdasarkan token
         $user = User::where('token', $token)->first();
-        
+
         if (!$user) {
             return false;
         }

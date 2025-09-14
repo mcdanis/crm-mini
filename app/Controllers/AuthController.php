@@ -76,7 +76,7 @@ class AuthController
 
         // Update token di database
         $user->update([
-            'token' => $token,
+            'token' => $token . $user->id,
             'token_expire_at' => $tokenExpire
         ]);
 

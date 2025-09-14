@@ -7,13 +7,15 @@ return new class {
 	public function up(): void
 	{
 		$schema = Capsule::schema();
-		$tableName = 'services';
+		$tableName = 'settings';
 		if (!$schema->hasTable($tableName)) {
 			$schema->create($tableName, function (Blueprint $table) {
 				$table->bigIncrements('id');
-				$table->string('name', 200);
-				$table->text('description')->nullable();
-				$table->decimal('default_price', 12, 2)->default(0.00);
+				$table->string('app_name', 200)->nullable();
+				$table->text('logo')->nullable();
+				$table->string('currency', 10)->nullable();
+				$table->string('language', 4)->nullable();
+				$table->string('timezone', 30)->nullable();
 				$table->timestamps(); // created_at & updated_at
 			});
 		}
@@ -22,6 +24,6 @@ return new class {
 	public function down(): void
 	{
 		$schema = Capsule::schema();
-		$schema->dropIfExists('service');
+		$schema->dropIfExists('settings');
 	}
 };

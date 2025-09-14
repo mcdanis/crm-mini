@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-	
+
 	protected $fillable = [
-		'key', 'value',
+		'currency',
+		'timezone',
+		'language',
+		'updated_at',
+		'created_at'
 	];
-} 
+}

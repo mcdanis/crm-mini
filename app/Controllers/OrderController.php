@@ -3,9 +3,14 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Middleware\RouteMiddleware;
 
 class OrderController
 {
+    public function __construct()
+    {
+        RouteMiddleware::requireAuth();
+    }
     public function add()
     {
         View::render('orders.order_add_view', [

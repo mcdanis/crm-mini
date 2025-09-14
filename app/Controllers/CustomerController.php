@@ -3,9 +3,14 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Middleware\RouteMiddleware;
 
 class CustomerController
 {
+    public function __construct()
+    {
+        RouteMiddleware::requireAuth();
+    }
     public function add()
     {
         View::render('customers.customer_add_view', [

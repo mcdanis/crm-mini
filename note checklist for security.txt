@@ -1,0 +1,50 @@
+Oke, saya buatkan **checklist keamanan lengkap untuk aplikasi PHP native + JS vanilla** sesuai skenario Anda (aplikasi internal, login user/admin, input form, upload CSV/XLS, AJAX/fetch). Bisa dijadikan panduan saat development:
+
+---
+
+## **Checklist Keamanan Aplikasi PHP Native + JS Vanilla**
+
+| Area                               | Checklist                                                                             | Status/Notes |
+| ---------------------------------- | ------------------------------------------------------------------------------------- | ------------ |
+| **1. Autentikasi & Hak Akses**     | Gunakan `password_hash()` untuk menyimpan password                                    |              |
+|                                    | Gunakan `password_verify()` saat login                                                |              |
+|                                    | Regenerasi session ID setelah login (`session_regenerate_id(true)`)                   |              |
+|                                    | Batasi durasi session (idle timeout 30–60 menit)                                      |              |
+|                                    | Set cookie session dengan `Secure`, `HttpOnly`, `SameSite=Strict`                     |              |
+|                                    | Periksa level akses di setiap halaman / endpoint backend                              |              |
+|                                    | Jangan hanya mengandalkan JS untuk kontrol akses                                      |              |
+| **2. Input Validation & Database** | Gunakan **prepared statement** (PDO/mysqli) untuk semua query                         |              |
+|                                    | Escape output ke browser dengan `htmlspecialchars()`                                  |              |
+|                                    | Untuk JS, encode data JSON dari backend (`json_encode()`)                             |              |
+|                                    | Terapkan **CSRF token** di form/fetch, verifikasi di backend                          |              |
+|                                    | Validasi semua input user di backend (tidak hanya di frontend)                        |              |
+|                                    | Batasi panjang input (max length) untuk mencegah buffer overflow                      |              |
+| **3. XSS & Content Security**      | Gunakan **CSP header** untuk mencegah inline script & resource dari domain asing      |              |
+|                                    | Escape semua output user di HTML                                                      |              |
+|                                    | Hindari eval() atau innerHTML langsung dari input user                                |              |
+| **4. File Upload**                 | Batasi tipe file (`.csv`, `.xls`, `.xlsx`)                                            |              |
+|                                    | Batasi ukuran file upload                                                             |              |
+|                                    | Simpan file **di luar web root**                                                      |              |
+|                                    | Validasi file di server sebelum diproses                                              |              |
+|                                    | Jangan jalankan file upload secara langsung                                           |              |
+|                                    | Jika perlu download/view, gunakan **script PHP khusus**                               |              |
+| **5. AJAX / Fetch / API**          | Semua validasi tetap dilakukan di backend                                             |              |
+|                                    | Escape semua output JSON                                                              |              |
+|                                    | Periksa hak akses untuk setiap request AJAX                                           |              |
+|                                    | Pertimbangkan rate limiting jika endpoint sensitif                                    |              |
+| **6. Hosting & SSL**               | Gunakan HTTPS untuk semua request                                                     |              |
+|                                    | Hindari menyimpan sensitive file di public_html                                       |              |
+|                                    | Gunakan `.htaccess` untuk proteksi folder penting                                     |              |
+|                                    | Update PHP ke versi terbaru                                                           |              |
+| **7. Logging & Error Handling**    | Jangan tampilkan error detail ke user                                                 |              |
+|                                    | Simpan error ke log file server untuk debugging                                       |              |
+|                                    | Batasi informasi yang dikirimkan di response (misal: “Invalid login” tanpa detail DB) |              |
+| **8. Backup & Maintenance**        | Backup database rutin                                                                 |              |
+|                                    | Backup file upload & konfigurasi server                                               |              |
+|                                    | Audit security secara berkala                                                         |              |
+
+---
+
+Kalau mau, saya bisa buat versi **lebih praktis & ringkas**, misal **“Checklist Developer Daily Security”**, yang bisa langsung dijadikan **template coding sehari-hari**, termasuk snippet kode PHP/JS siap pakai untuk password, CSRF, escape output, dan validasi file upload.
+
+Apakah mau saya buatkan versi praktis itu juga?

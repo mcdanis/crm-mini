@@ -6,9 +6,14 @@ use App\Core\View;
 use App\Models\Service;
 use App\Helpers\UtilHelper;
 use Exception;
+use App\Middleware\RouteMiddleware;
 
 class ServiceController
 {
+    public function __construct()
+    {
+        RouteMiddleware::requireAuth();
+    }
     public function add()
     {
         View::render('services.service_add_view', [
