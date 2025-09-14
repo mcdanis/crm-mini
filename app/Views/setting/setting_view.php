@@ -962,7 +962,8 @@ include_once __DIR__ . '/../header_view.php';
 <div class="modal fade" id="editUserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="/api/user/update" method="POST">
+            <form action="/api/user/profile/update" method="POST" id="updateUser">
+                <input type="hidden" id="user-edit-id" name="user_id" />
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="fas fa-user-edit me-2"></i>Edit User
@@ -978,28 +979,29 @@ include_once __DIR__ . '/../header_view.php';
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Full Name</label>
-                                <input type="text" class="form-control" name="name" />
+                                <input type="text" class="form-control" id="user-edit-full-name" name="full_name" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Email Address</label>
                                 <input
                                     type="email"
                                     class="form-control"
-                                    name="email" />
+                                    name="email"
+                                    id="user-edit-email" />
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Role</label>
-                                <select class="form-select" name="role">
+                                <select class="form-select" name="role" id="user-edit-role">
                                     <option value="user">User</option>
                                     <option value="admin" selected>Admin</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Status</label>
-                                <select class="form-select" name="status">
+                                <select class="form-select" name="status" id="user-edit-status">
                                     <option value="1" selected>Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
@@ -1154,6 +1156,44 @@ include_once __DIR__ . '/../header_view.php';
             });
 
     })
+    document.getElementById("updateUser").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const result = document.getElementById("result");
+        result.innerHTML = "";
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        fetch(form.action, {
+                method: form.method,
+                body: formData,
+            })
+            .then((response) => response.text())
+            .then((data) => {
+                result.innerHTML = data;
+
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            })
+            .finally(() => {
+                const modalElement = document.getElementById('editUserModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement) ||
+                    new bootstrap.Modal(modalElement);
+                modalInstance.hide();
+                submitBtn.disabled = false;
+                document.getElementById("filterUsers").dispatchEvent(new Event("submit", {
+                    cancelable: true,
+                    bubbles: true
+                }));
+
+            });
+
+    })
 
     function ajaxGet(url, msg) {
         const confirmMessage = confirm(msg)
@@ -1173,6 +1213,14 @@ include_once __DIR__ . '/../header_view.php';
                     console.error("Error:", error);
                 });
         }
+    }
+
+    function editUser(id, fullName, email, role, status) {
+        document.getElementById('user-edit-full-name').value = (fullName);
+        document.getElementById('user-edit-email').value = (email);
+        document.getElementById('user-edit-role').value = (role);
+        document.getElementById('user-edit-status').value = (status);
+        document.getElementById('user-edit-id').value = (id);
     }
 </script>
 <?php include_once __DIR__ . '/../footer_view.php'; ?>

@@ -21,6 +21,7 @@ $router->get('customer/detail', 'CustomerController@detail');
 // service
 $router->get('service/add', 'ServiceController@add');
 $router->get('service/list', 'ServiceController@index');
+$router->get('service/edit/{id}', 'ServiceController@editService');
 
 // orderss
 $router->get('order/add', 'OrderController@add');
@@ -47,7 +48,7 @@ $router->post('api/setting/update', 'SettingController@updateSetting');
 
 // API Service
 $router->post('api/service/create', 'ServiceController@createService');
-$router->post('api/service/update', 'ServiceController@updateService');
+$router->post('api/service/update/{id}', 'ServiceController@updateService');
 $router->get('api/service/delete/{id}', function ($id) {
     (new ServiceController)->deleteService($id);
 });

@@ -49,8 +49,10 @@ include_once __DIR__ . '/../navbar_view.php';
                             <td><?= $service->default_price; ?></td>
                             <td><?= substr($service->description, 0, 100); ?></td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil-fill"></i></button>
-                                <a href="/api/service/delete/<?= $service->id ?>" onclick="return confirm ('Are you sure to delete this service?')" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                                <div class="btn-group" role="group">
+                                    <a href="/service/edit/<?= $service->id ?>" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="/api/service/delete/<?= $service->id ?>" onclick="return confirm ('Are you sure to deactive this service?. it will remove all data related with this Service')" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                                </div>
                             </td>
                         </tr>
                     <?php

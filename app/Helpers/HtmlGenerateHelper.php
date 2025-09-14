@@ -22,13 +22,13 @@ class HtmlGenerateHelper
         if ($user->is_active == 1) {
 
             $actionBtn = '
-                <a onclick="ajaxGet(`/api/user/0/' . $user->id . '`, `Are you sure to deactivate this user?`)" 
+                <a title="inactivate this user" onclick="ajaxGet(`/api/user/0/' . $user->id . '`, `Are you sure to deactivate this user?`)" 
                 class="btn btn-sm btn-outline-danger">
                     <i class="fas fa-lock"></i>
                 </a>';
         } else {
             $actionBtn = '
-                <a onclick="ajaxGet(`/api/user/1/' . $user->id . '`, `Are you sure to activate this user?`)" 
+                <a title="activate this user" onclick="ajaxGet(`/api/user/1/' . $user->id . '`, `Are you sure to activate this user?`)" 
                 class="btn btn-sm btn-outline-success">
                     <i class="fas fa-unlock"></i>
                 </a>';
@@ -55,7 +55,7 @@ class HtmlGenerateHelper
                 <button
                     class="btn btn-sm btn-outline-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#editUserModal">
+                    data-bs-target="#editUserModal" onclick="editUser(`' . $user->id . '`, `' . $user->full_name . '`,`' . $user->email . '`,`' . $user->role . '`,`' . $user->is_active . '`)">
                     <i class="fas fa-edit"></i>
                 </button> 
                 ' . $actionBtn . '

@@ -106,7 +106,7 @@ body {
 
 .btn-custom {
   border-radius: 25px;
-  padding: 8px 20px;
+  padding: 6px 0px;
   font-weight: 500;
   transition: all 0.3s ease;
 }
@@ -718,7 +718,7 @@ input:checked + .slider:before {
 }
 
 .role-admin {
-  background: linear-gradient(45deg, var(--danger-color), #f87171);
+  background: linear-gradient(45deg, var(--danger-color), #272e6a);
   color: white;
 }
 

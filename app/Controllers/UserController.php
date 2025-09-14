@@ -29,36 +29,49 @@ class UserController
 
     public function updateProfile()
     {
-        if (!isset($_POST['user_id'])) {
-            // Ambil user saat ini via login token
-            $user = $this->getUser($_COOKIE['login_token']);
+        try {
 
-            // Update profile dasar
-            $user->update([
-                'email'     => $_POST['email'],
-                'full_name' => $_POST['full_name'],
-            ]);
+            if (!isset($_POST['user_id'])) {
+                // Ambil user saat ini via login token
+                $user = $this->getUser($_COOKIE['login_token']);
 
-            $message = 'Your profile has been updated!';
+                // Update profile dasar
+                $user->update([
+                    'email'     => $_POST['email'],
+                    'full_name' => $_POST['full_name'],
+                ]);
 
-            // Cek role hanya jika field role dikirim
-            if (isset($_POST['role'])) {
-                $checkAdmin = User::where('role', 'admin')->count();
+                $message = 'Your profile has been updated!';
 
-                // Jika ada lebih dari 1 admin, boleh update role
-                if ($checkAdmin > 1 || $user->role != 'admin') {
-                    $user->update([
-                        'role' => $_POST['role']
-                    ]);
+                // Cek role hanya jika field role dikirim
+                if (isset($_POST['role'])) {
+                    $checkAdmin = User::where('role', 'admin')->count();
+
+                    // Jika ada lebih dari 1 admin, boleh update role
+                    if ($checkAdmin > 1 || $user->role != 'admin') {
+                        $user->update([
+                            'role' => $_POST['role']
+                        ]);
+                    }
+
+                    if ($user->role != $_POST['role']) {
+                        // Hanya satu admin, role tidak boleh diubah
+                        $message .= " Role can't be changed because you're the only Admin";
+                    }
                 }
 
-                if ($user->role != $_POST['role']) {
-                    // Hanya satu admin, role tidak boleh diubah
-                    $message .= " Role can't be changed because you're the only Admin";
-                }
+                return UtilHelper::redirectWithMessage('/user/profile', 'success', $message);
+            } else {
+                $user = $this->getUser($_POST['user_id'], 'id')->update([
+                    'email'     => $_POST['email'],
+                    'full_name' => $_POST['full_name'],
+                    'role' => $_POST['role'],
+                    'is_active' => $_POST['status'],
+                ]);
+                return ResponseHelper::success('User profile updated!');
             }
-
-            return UtilHelper::redirectWithMessage('/user/profile', 'success', $message);
+        } catch (\Throwable $th) {
+            return UtilHelper::redirectWithMessage('/user/profile', 'error', 'something went wrong!');
         }
     }
 

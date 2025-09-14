@@ -17,7 +17,7 @@ include_once __DIR__ . '/../../lang/lang.php';
     <link
         href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css"
         rel="stylesheet" />
-    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <link rel="stylesheet" href="/../public/assets/css/style.css">
 </head>
 
 <body>
