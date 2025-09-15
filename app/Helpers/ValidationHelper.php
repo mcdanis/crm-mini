@@ -36,15 +36,17 @@ class ValidationHelper
      */
     public static function alpha(string $value): bool
     {
-        return ctype_alpha($value);
+        // Hanya huruf + spasi
+        return (bool) preg_match('/^[a-zA-Z\s]+$/', $value);
     }
+
 
     /**
      * Validasi alfanumerik
      */
     public static function alphaNum(string $value): bool
     {
-        return ctype_alnum($value);
+        return preg_match('/^[a-zA-Z0-9 ]+$/', $value) === 1;
     }
 
     /**
@@ -69,6 +71,36 @@ class ValidationHelper
     public static function isUserActive(int $userId): bool
     {
         return User::where('id', $userId)->where('is_active', 1)->exists();
+    }
+
+    public static function required(array $data, array $fields): array
+    {
+        $errors = [];
+
+        foreach ($fields as $field) {
+            $value = $data[$field] ?? null;
+
+            if ($value === null || trim($value) === '') {
+                $errors[] = ucfirst(self::humanize($field)) . " is required.";
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * Convert field name to human readable string
+     * e.g. nameVar -> "name var", name_var -> "name var"
+     */
+    private static function humanize(string $field): string
+    {
+        // ubah snake_case ke spasi
+        $field = str_replace('_', ' ', $field);
+
+        // ubah camelCase ke spasi
+        $field = preg_replace('/([a-z])([A-Z])/', '$1 $2', $field);
+
+        return strtolower($field);
     }
 }
 

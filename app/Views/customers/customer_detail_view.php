@@ -1,4 +1,9 @@
-<?php include_once __DIR__ . '/../header_view.php'; ?>
+<?php
+
+use App\Helpers\UtilHelper;
+
+include_once __DIR__ . '/../header_view.php';
+?>
 <?php include_once __DIR__ . '/../navbar_view.php'; ?>
 <style>
     .main-container {
@@ -10,7 +15,7 @@
         margin: 1rem;
     }
 
-    .customer-header {
+    /* .customer-header {
         background: linear-gradient(135deg,
                 var(--primary-color),
                 var(--secondary-color));
@@ -19,7 +24,7 @@
         padding: 2rem;
         position: relative;
         overflow: hidden;
-    }
+    } */
 
     .customer-header::before {
         content: "";
@@ -222,7 +227,6 @@
     .form-control,
     .form-select {
         border-radius: 10px;
-        border: 2px solid var(--gray-200);
         transition: all 0.3s ease;
     }
 
@@ -411,25 +415,24 @@
                 <a href="#" class="text-white me-3" style="font-size: 1.5rem">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <div class="customer-avatar">JD</div>
+                <div class="customer-avatar"><?= UtilHelper::getInitials($customer->full_name) ?></div>
                 <div class="flex-grow-1">
-                    <h1 class="h2 mb-2">John Doe</h1>
+                    <h1 class="h2 mb-2"><?= $customer->full_name ?></h1>
                     <p class="mb-2 opacity-75">
-                        <i class="fas fa-envelope me-2"></i>john.doe@email.com
+                        <i class="fas fa-envelope me-2"></i><?= $customer->email ?? '-' ?>
                         <span class="mx-3">|</span>
-                        <i class="fas fa-phone me-2"></i>+62 812 3456 7890
+                        <i class="fas fa-phone me-2"></i><?= $customer->phone ?? '-' ?>
                     </p>
                     <div>
                         <span class="customer-tag tag-vip">
-                            <i class="fas fa-crown me-1"></i>VIP Customer
+                            VIP Customer
                         </span>
-                        <span class="customer-tag tag-regular"> Regular Client </span>
                     </div>
                 </div>
                 <div class="text-end">
                     <div class="mb-2">
                         <small class="opacity-75">Customer Since</small>
-                        <div class="h5 mb-0">Jan 2023</div>
+                        <div class="h5 mb-0"><?= $customer->created_at ?></div>
                     </div>
                     <div>
                         <small class="opacity-75">Last Contact</small>
@@ -952,6 +955,24 @@ Jl. Sudirman No.12, Jakarta</textarea>
         </button>
     </div>
 
+    <!-- new order -->
+    <div
+        class="modal fade"
+        id="newOrderModal"
+        tabindex="-1"
+        aria-labelledby="newOrderModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    d
+                </div>
+                <div class="modal-body">
+                    ss
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- New Activity Modal -->
     <div
         class="modal fade"

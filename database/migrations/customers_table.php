@@ -47,6 +47,6 @@ return new class {
 	public function down(): void
 	{
 		$schema = Capsule::schema();
-		$schema->dropIfExists($tableName);
+		$schema->dropIfExists('customers');
 	}
-}; 
+};

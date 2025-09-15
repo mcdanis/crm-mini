@@ -21,4 +21,20 @@ class ResponseHelper
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>';
     }
+
+    public static function jsonSuccess($msg)
+    {
+        return json_encode([
+            'status' => 'success',
+            'message' => self::success($msg),
+        ]);
+    }
+
+    public static function jsonFailed($msg)
+    {
+        return json_encode([
+            'status' => 'error',
+            'message' => self::failed($msg),
+        ]);
+    }
 }

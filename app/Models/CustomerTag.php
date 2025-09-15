@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CustomerTag extends Model
 {
 	protected $fillable = [
-		'customer_id', 'name',
+		'customer_id',
+		'tag_id',
 	];
 
 	public $timestamps = false; // hanya created_at
@@ -17,4 +18,4 @@ class CustomerTag extends Model
 	{
 		return $this->belongsTo(Customer::class, 'customer_id');
 	}
-} 
+}

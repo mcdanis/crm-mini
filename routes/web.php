@@ -16,7 +16,7 @@ $router->get('dashboard', 'DashboardController@index');
 // customer
 $router->get('customer/add', 'CustomerController@add');
 $router->get('customer/list', 'CustomerController@index');
-$router->get('customer/detail', 'CustomerController@detail');
+$router->get('customer/detail/{id}', 'CustomerController@detail');
 
 // service
 $router->get('service/add', 'ServiceController@add');
@@ -55,6 +55,7 @@ $router->get('api/service/delete/{id}', function ($id) {
 
 // API customer
 $router->post('api/customer/create', 'CustomerController@create');
+$router->get('api/customer/delete/{id}', 'CustomerController@delete');
 
 
 // 

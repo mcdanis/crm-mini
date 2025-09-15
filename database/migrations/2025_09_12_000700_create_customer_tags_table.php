@@ -12,7 +12,7 @@ return new class {
 			$schema->create('customer_tags', function (Blueprint $table) {
 				$table->bigIncrements('id');
 				$table->unsignedBigInteger('customer_id');
-				$table->string('name', 255);
+				$table->bigInteger('tag_id');
 				$table->timestamp('created_at')->useCurrent();
 			});
 		}
@@ -23,4 +23,4 @@ return new class {
 		$schema = Capsule::schema();
 		$schema->dropIfExists('customer_tags');
 	}
-}; 
+};
