@@ -371,8 +371,10 @@ $lang_id = [
     "privacy_policy" => "Kebijakan Privasi",
     "terms_of_service" => "Syarat Layanan",
 
-    // setting
+    // other
     "status" => "Status",
+    "note_placeholder" => "Note tambahan.",
+    "address_placeholder" => "Nama jalan, gedung, no rumah"
 ];
 
 // English Language Pack
@@ -574,7 +576,8 @@ $lang_en = [
     // setting
     "status" => "Status",
     "user_role" => "Role",
-
+    "note_placeholder" => "Additional notes.",
+    "address_placeholder" => "Street address, building, etc"
 ];
 
 class LanguageManager

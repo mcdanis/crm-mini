@@ -8,48 +8,34 @@
     </div>
 
     <div class="dashboard-section p-4">
-        <form action="/api/service/update/<?= $service->id ?>" method="POST">
+        <div id="result"></div>
+        <form action="/api/service/update/<?= $service->id ?>" method="POST" id="updateService">
             <input type="hidden" value="<?= $service->id ?>">
             <div class="row g-4">
                 <!-- Nama Layanan -->
                 <div class="col-md-6">
-                    <label for="serviceName" class="form-label fw-semibold"><?= t('service_name') ?> <span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="serviceName"
-                        name="name"
-                        maxlength="200"
-                        value="<?= $service->name ?>"
-                        required>
+                    <label for="serviceName" class="form-label fw-semibold"><?= t('service_name') ?> <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="serviceName" name="name" maxlength="200"
+                        value="<?= $service->name ?>" required>
                     <div class="form-text">Max 200 character.</div>
                 </div>
 
                 <!-- Harga Default -->
                 <div class="col-md-6">
-                    <label for="defaultPrice" class="form-label fw-semibold"><?= t('default_price') ?> <span class="text-danger">*</span></label>
+                    <label for="defaultPrice" class="form-label fw-semibold"><?= t('default_price') ?> <span
+                            class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-text"><?= $currency ?></span>
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="defaultPrice"
-                            name="default_price"
-                            step="0.01"
-                            min="0"
-                            required
-                            value="<?= $service->default_price ?>"
-                            placeholder="10.000,00">
+                        <input type="number" class="form-control" id="defaultPrice" name="default_price" step="0.01"
+                            min="0" required value="<?= $service->default_price ?>" placeholder="10.000,00">
                     </div>
                 </div>
 
                 <!-- Deskripsi -->
                 <div class="col-12">
                     <label for="description" class="form-label fw-semibold"><?= t('service_description') ?></label>
-                    <textarea
-                        class="form-control"
-                        id="description"
-                        name="description"
+                    <textarea class="form-control" id="description" name="description"
                         rows="4"><?= $service->description ?></textarea>
                 </div>
             </div>
@@ -61,7 +47,4 @@
         </form>
     </div>
 </div>
-<script>
-
-</script>
 <?php include_once __DIR__ . '/../footer_view.php'; ?>

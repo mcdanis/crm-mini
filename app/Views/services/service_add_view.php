@@ -27,49 +27,33 @@
             <div class="row g-4">
                 <!-- Nama Layanan -->
                 <div class="col-md-6">
-                    <label for="serviceName" class="form-label fw-semibold"><?= t('service_name') ?> <span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="serviceName"
-                        name="name"
-                        maxlength="200"
-                        required>
+                    <label for="serviceName" class="form-label fw-semibold"><?= t('service_name') ?> <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="serviceName" name="name" maxlength="200" required>
                     <div class="form-text">Max 200 character.</div>
                 </div>
 
                 <!-- Harga Default -->
                 <div class="col-md-6">
-                    <label for="defaultPrice" class="form-label fw-semibold"><?= t('default_price') ?> <span class="text-danger">*</span></label>
+                    <label for="defaultPrice" class="form-label fw-semibold"><?= t('default_price') ?> <span
+                            class="text-danger">*</span></label>
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="defaultPrice"
-                            name="default_price"
-                            step="0.01"
-                            min="0"
-                            value="0.00"
-                            required
-                            placeholder="0.00">
+                        <span class="input-group-text"><?= $currency ?></span>
+                        <input type="number" class="form-control" id="defaultPrice" name="default_price" step="0.01"
+                            min="0" value="0.00" required placeholder="0.00">
                     </div>
                 </div>
 
                 <!-- Deskripsi -->
                 <div class="col-12">
                     <label for="description" class="form-label fw-semibold"><?= t('service_description') ?></label>
-                    <textarea
-                        class="form-control"
-                        id="description"
-                        name="description"
-                        rows="4"></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="4"></textarea>
                 </div>
             </div>
 
             <div class="mt-4 text-end">
                 <button type="submit" class="btn btn-c-primary px-4">Simpan</button>
-                <button type="reset" class="btn btn-outline-secondary ms-3">Batal</button>
+                <button type="reset" class="btn btn-outline-secondary ms-3">Reset</button>
             </div>
         </form>
     </div>

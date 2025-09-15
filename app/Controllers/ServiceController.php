@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Helpers\ResponseHelper;
 use App\Models\Service;
-use App\Models\Setting;
+use App\Services\SettingService;
 use App\Helpers\UtilHelper;
 use Exception;
 use App\Middleware\RouteMiddleware;
@@ -18,8 +18,10 @@ class ServiceController
     }
     public function add()
     {
+        $currency = SettingService::currency();
         View::render('services.service_add_view', [
             'title' => 'Customer List',
+            'currency' => $currency
         ]);
     }
 
@@ -49,7 +51,7 @@ class ServiceController
     public function editService($id)
     {
         $service = Service::find($id);
-        $currency = Setting::select('currency')->first()->currency;
+        $currency = SettingService::currency();
         View::render('services.service_edit_view', [
             'title' => 'Edit Service',
             'service' => $service,
