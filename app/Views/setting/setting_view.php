@@ -22,10 +22,7 @@ include_once __DIR__ . '/../header_view.php';
 
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a
-                            class="nav-link active"
-                            href="#"
-                            onclick="showSection('general')">
+                        <a class="nav-link active" href="#" onclick="showSection('general')">
                             <i class="fas fa-sliders-h me-2"></i>General Settings
                         </a>
                     </li>
@@ -40,10 +37,7 @@ include_once __DIR__ . '/../header_view.php';
                         </a>
                     </li>
                     <li class="nav-item d-none">
-                        <a
-                            class="nav-link"
-                            href="#"
-                            onclick="showSection('notifications')">
+                        <a class="nav-link" href="#" onclick="showSection('notifications')">
                             <i class="fas fa-bell me-2"></i>Notifications
                         </a>
                     </li>
@@ -89,12 +83,11 @@ include_once __DIR__ . '/../header_view.php';
                                             <label class="form-label fw-bold">Default Language</label>
                                             <select name="language" class="form-select">
                                                 <?php foreach (LANGUAGES as $code => $label): ?>
-                                                    <option
-                                                        <?php
-                                                        if ($setting->language == $code) {
-                                                            echo 'selected';
-                                                        }
-                                                        ?>
+                                                    <option <?php
+                                                    if ($setting->language == $code) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>
                                                         value="<?= $code ?>"><?= $label ?></option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -106,12 +99,11 @@ include_once __DIR__ . '/../header_view.php';
 
                                             <select name="currency" class="form-select">
                                                 <?php foreach (CURRENCIES as $code => $data): ?>
-                                                    <option
-                                                        <?php
-                                                        if ($setting->currency == $code) {
-                                                            echo 'selected';
-                                                        }
-                                                        ?>
+                                                    <option <?php
+                                                    if ($setting->currency == $code) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>
                                                         value="<?= $code ?>">
                                                         <?= $data['name'] ?> (<?= $code ?>) – <?= $data['symbol'] ?>
                                                     </option>
@@ -140,12 +132,9 @@ include_once __DIR__ . '/../header_view.php';
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="setting-item">
-                                        <div
-                                            class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <div
-                                                    class="setting-icon"
-                                                    style="background: var(--success-color)">
+                                                <div class="setting-icon" style="background: var(--success-color)">
                                                     <i class="fas fa-moon"></i>
                                                 </div>
                                                 <div>
@@ -162,12 +151,9 @@ include_once __DIR__ . '/../header_view.php';
                                 </div>
                                 <div class="col-md-4">
                                     <div class="setting-item">
-                                        <div
-                                            class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <div
-                                                    class="setting-icon"
-                                                    style="background: var(--info-color)">
+                                                <div class="setting-icon" style="background: var(--info-color)">
                                                     <i class="fas fa-language"></i>
                                                 </div>
                                                 <div>
@@ -184,12 +170,9 @@ include_once __DIR__ . '/../header_view.php';
                                 </div>
                                 <div class="col-md-4">
                                     <div class="setting-item">
-                                        <div
-                                            class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <div
-                                                    class="setting-icon"
-                                                    style="background: var(--warning-color)">
+                                                <div class="setting-icon" style="background: var(--warning-color)">
                                                     <i class="fas fa-save"></i>
                                                 </div>
                                                 <div>
@@ -211,16 +194,12 @@ include_once __DIR__ . '/../header_view.php';
 
                 <!-- User Management -->
                 <div id="users" class="settings-section">
-                    <div
-                        class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="mb-0 fw-bold">
                             <i class="fas fa-users-cog me-2 text-primary"></i>User
                             Management
                         </h2>
-                        <button
-                            class="btn btn-c-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#addUserModal">
+                        <button class="btn btn-c-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
                             <i class="fas fa-plus me-2"></i>Add New User
                         </button>
                     </div>
@@ -277,10 +256,7 @@ include_once __DIR__ . '/../header_view.php';
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <input
-                                            type="search"
-                                            class="form-control"
-                                            placeholder="Search users..."
+                                        <input type="search" class="form-control" placeholder="Search users..."
                                             name="name" />
                                     </div>
                                     <div class="col-md-2">
@@ -350,24 +326,15 @@ include_once __DIR__ . '/../header_view.php';
                                         </select>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Require uppercase letters</label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Require lowercase letters</label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Require numbers</label>
                                     </div>
                                     <div class="form-check mb-3">
@@ -401,17 +368,11 @@ include_once __DIR__ . '/../header_view.php';
                                         </select>
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Remember me option</label>
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Force logout on browser close</label>
                                     </div>
                                     <div class="mb-3">
@@ -448,8 +409,7 @@ include_once __DIR__ . '/../header_view.php';
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">New Customer</h6>
                                                         <small class="text-muted">When a new customer is added</small>
@@ -461,8 +421,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </div>
                                             </div>
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">Order Completed</h6>
                                                         <small class="text-muted">When an order is completed</small>
@@ -474,8 +433,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </div>
                                             </div>
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">Payment Received</h6>
                                                         <small class="text-muted">When a payment is received</small>
@@ -489,8 +447,7 @@ include_once __DIR__ . '/../header_view.php';
                                         </div>
                                         <div class="col-md-6">
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">Weekly Reports</h6>
                                                         <small class="text-muted">Weekly summary reports</small>
@@ -502,8 +459,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </div>
                                             </div>
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">System Alerts</h6>
                                                         <small class="text-muted">Important system notifications</small>
@@ -515,11 +471,11 @@ include_once __DIR__ . '/../header_view.php';
                                                 </div>
                                             </div>
                                             <div class="setting-item">
-                                                <div
-                                                    class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <h6 class="mb-1">Marketing Updates</h6>
-                                                        <small class="text-muted">Marketing and promotional emails</small>
+                                                        <small class="text-muted">Marketing and promotional
+                                                            emails</small>
                                                     </div>
                                                     <label class="toggle-switch">
                                                         <input type="checkbox" />
@@ -544,10 +500,7 @@ include_once __DIR__ . '/../header_view.php';
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">SMTP Host</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            value="smtp.gmail.com" />
+                                        <input type="text" class="form-control" value="smtp.gmail.com" />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">SMTP Port</label>
@@ -555,23 +508,14 @@ include_once __DIR__ . '/../header_view.php';
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Username</label>
-                                        <input
-                                            type="email"
-                                            class="form-control"
-                                            value="noreply@company.com" />
+                                        <input type="email" class="form-control" value="noreply@company.com" />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Password</label>
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            value="••••••••" />
+                                        <input type="password" class="form-control" value="••••••••" />
                                     </div>
                                     <div class="form-check">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Use SSL/TLS</label>
                                     </div>
                                 </div>
@@ -641,17 +585,11 @@ include_once __DIR__ . '/../header_view.php';
                                         <input type="number" class="form-control" value="30" />
                                     </div>
                                     <div class="form-check mb-3">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Enable Debug Mode</label>
                                     </div>
                                     <div class="form-check">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            checked />
+                                        <input class="form-check-input" type="checkbox" checked />
                                         <label class="form-check-label">Enable Error Reporting</label>
                                     </div>
                                 </div>
@@ -721,33 +659,21 @@ include_once __DIR__ . '/../header_view.php';
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label fw-bold">Backup Time</label>
-                                                <input
-                                                    type="time"
-                                                    class="form-control"
-                                                    value="02:00" />
+                                                <input type="time" class="form-control" value="02:00" />
                                             </div>
                                             <div class="form-check mb-3">
-                                                <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    checked />
+                                                <input class="form-check-input" type="checkbox" checked />
                                                 <label class="form-check-label">Include Database</label>
                                             </div>
                                             <div class="form-check">
-                                                <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    checked />
+                                                <input class="form-check-input" type="checkbox" checked />
                                                 <label class="form-check-label">Include Files</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label fw-bold">Retention Period (days)</label>
-                                                <input
-                                                    type="number"
-                                                    class="form-control"
-                                                    value="30" />
+                                                <input type="number" class="form-control" value="30" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label fw-bold">Storage Location</label>
@@ -759,10 +685,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </select>
                                             </div>
                                             <div class="form-check mb-3">
-                                                <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    checked />
+                                                <input class="form-check-input" type="checkbox" checked />
                                                 <label class="form-check-label">Compress Backup</label>
                                             </div>
                                             <div class="form-check">
@@ -820,8 +743,7 @@ include_once __DIR__ . '/../header_view.php';
                                 </div>
                                 <div class="card-body">
                                     <div class="list-group list-group-flush">
-                                        <div
-                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <strong>Full Backup</strong><br />
                                                 <small class="text-muted">Sep 14, 2024</small>
@@ -833,8 +755,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </button>
                                             </div>
                                         </div>
-                                        <div
-                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <strong>Database Backup</strong><br />
                                                 <small class="text-muted">Sep 13, 2024</small>
@@ -846,8 +767,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </button>
                                             </div>
                                         </div>
-                                        <div
-                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <strong>Full Backup</strong><br />
                                                 <small class="text-muted">Sep 12, 2024</small>
@@ -859,8 +779,7 @@ include_once __DIR__ . '/../header_view.php';
                                                 </button>
                                             </div>
                                         </div>
-                                        <div
-                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <strong>Files Backup</strong><br />
                                                 <small class="text-muted">Sep 11, 2024</small>
@@ -878,10 +797,7 @@ include_once __DIR__ . '/../header_view.php';
                                     <div class="mt-4">
                                         <h6 class="fw-bold">Restore System</h6>
                                         <div class="mb-3">
-                                            <input
-                                                type="file"
-                                                class="form-control"
-                                                accept=".sql,.zip" />
+                                            <input type="file" class="form-control" accept=".sql,.zip" />
                                         </div>
                                         <button class="btn btn-warning btn-custom w-100">
                                             <i class="fas fa-upload me-2"></i>Restore from File
@@ -906,10 +822,7 @@ include_once __DIR__ . '/../header_view.php';
                     <h5 class="modal-title">
                         <i class="fas fa-user-plus me-2"></i>Add New User
                     </h5>
-                    <button
-                        type="button"
-                        class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -920,7 +833,8 @@ include_once __DIR__ . '/../header_view.php';
                                 <input type="text" class="form-control" name="full_name" required />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
+                                <label class="form-label fw-bold">Email Address <span
+                                        class="text-danger">*</span></label>
                                 <input type="email" class="form-control" name="email" required />
                             </div>
                         </div>
@@ -943,10 +857,7 @@ include_once __DIR__ . '/../header_view.php';
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary"
-                        data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-c-primary">
@@ -968,10 +879,7 @@ include_once __DIR__ . '/../header_view.php';
                     <h5 class="modal-title">
                         <i class="fas fa-user-edit me-2"></i>Edit User
                     </h5>
-                    <button
-                        type="button"
-                        class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -983,11 +891,7 @@ include_once __DIR__ . '/../header_view.php';
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Email Address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    name="email"
-                                    id="user-edit-email" />
+                                <input type="email" class="form-control" name="email" id="user-edit-email" />
                             </div>
 
                         </div>
@@ -1012,10 +916,7 @@ include_once __DIR__ . '/../header_view.php';
 
                 </div>
                 <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary"
-                        data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-c-primary">
@@ -1053,12 +954,12 @@ include_once __DIR__ . '/../header_view.php';
     var tooltipTriggerList = [].slice.call(
         document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 
     // Form validation
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Add form validation here if needed
         console.log("Settings page loaded successfully");
     });
@@ -1069,158 +970,14 @@ include_once __DIR__ . '/../header_view.php';
         alert("Settings saved successfully!");
     }
 
-    document.getElementById("updateSetting").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const result = document.getElementById("result");
-        result.innerHTML = "";
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-
-        fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then((response) => response.text())
-            .then((data) => {
-                result.innerHTML = data;
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                submitBtn.disabled = false;
-            });
-    });
-
-    document.getElementById("addUser").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const result = document.getElementById("result");
-        result.innerHTML = "";
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-
-        fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then((response) => response.text())
-            .then((data) => {
-                result.innerHTML = data;
-
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                const modalElement = document.getElementById('addUserModal');
-                const modalInstance = bootstrap.Modal.getInstance(modalElement) ||
-                    new bootstrap.Modal(modalElement);
-                modalInstance.hide();
-                submitBtn.disabled = false;
-                document.getElementById("filterUsers").dispatchEvent(new Event("submit", {
-                    cancelable: true,
-                    bubbles: true
-                }));
-
-            });
-    });
-
-    document.getElementById("filterUsers").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const result = document.getElementById("userDatas");
-
-        fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then((response) => response.text())
-            .then((data) => {
-                result.innerHTML = data;
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-
-    })
-    document.getElementById("updateUser").addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const result = document.getElementById("result");
-        result.innerHTML = "";
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-
-        fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then((response) => response.text())
-            .then((data) => {
-                result.innerHTML = data;
-
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            })
-            .finally(() => {
-                const modalElement = document.getElementById('editUserModal');
-                const modalInstance = bootstrap.Modal.getInstance(modalElement) ||
-                    new bootstrap.Modal(modalElement);
-                modalInstance.hide();
-                submitBtn.disabled = false;
-                document.getElementById("filterUsers").dispatchEvent(new Event("submit", {
-                    cancelable: true,
-                    bubbles: true
-                }));
-
-            });
-
-    })
-
-    function ajaxGet(url, msg) {
-        const confirmMessage = confirm(msg)
-        if (confirmMessage) {
-            fetch(url, {
-                    method: 'GET',
-                })
-                .then((response) => response.text())
-                .then((data) => {
-                    document.getElementById('result').innerHTML = data;
-                    document.getElementById("filterUsers").dispatchEvent(new Event("submit", {
-                        cancelable: true,
-                        bubbles: true
-                    }));
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        }
-    }
-
+    // Edit user (isi modal form)
     function editUser(id, fullName, email, role, status) {
-        document.getElementById('user-edit-full-name').value = (fullName);
-        document.getElementById('user-edit-email').value = (email);
-        document.getElementById('user-edit-role').value = (role);
-        document.getElementById('user-edit-status').value = (status);
-        document.getElementById('user-edit-id').value = (id);
+        document.getElementById("user-edit-full-name").value = fullName;
+        document.getElementById("user-edit-email").value = email;
+        document.getElementById("user-edit-role").value = role;
+        document.getElementById("user-edit-status").value = status;
+        document.getElementById("user-edit-id").value = id;
     }
+
 </script>
 <?php include_once __DIR__ . '/../footer_view.php'; ?>

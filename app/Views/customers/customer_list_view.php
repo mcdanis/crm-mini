@@ -15,7 +15,7 @@
                 <thead class="table-light">
                     <tr>
                         <th>#</th>
-                        <th>Full Name</th>
+                        <th><?= t('full_name') ?></th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Company</th>
@@ -36,7 +36,8 @@
                         <td>VIP</td>
                         <td>2025-09-13</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil-fill"></i></button>
+                            <button class="btn btn-sm btn-outline-primary me-1"><i
+                                    class="bi bi-pencil-fill"></i></button>
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
@@ -50,7 +51,8 @@
                         <td>Regular</td>
                         <td>2025-09-10</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil-fill"></i></button>
+                            <button class="btn btn-sm btn-outline-primary me-1"><i
+                                    class="bi bi-pencil-fill"></i></button>
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
