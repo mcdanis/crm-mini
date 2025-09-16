@@ -10,16 +10,15 @@ class Order extends Model
 {
 
 	protected $fillable = [
-		'customer_id', 'status', 'order_date', 'note', 'total_amount',
-		'total_paid', 'scheduled_at', 'deleted_at', 'created_by',
-	];
-
-	protected $casts = [
-		'order_date' => 'date',
-		'scheduled_at' => 'datetime',
-		'deleted_at' => 'datetime',
-		'total_amount' => 'decimal:2',
-		'total_paid' => 'decimal:2',
+		'customer_id',
+		'status',
+		'order_date',
+		'note',
+		'total_amount',
+		'total_paid',
+		'scheduled_at',
+		'deleted_at',
+		'created_by',
 	];
 
 	public function customer(): BelongsTo
@@ -41,4 +40,4 @@ class Order extends Model
 	{
 		return $this->belongsTo(User::class, 'created_by');
 	}
-} 
+}

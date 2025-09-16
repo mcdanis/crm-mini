@@ -157,8 +157,8 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="orderDate">Order Date</label>
-                        <input type="date" class="form-control" name="order_date" id="orderDate"
-                            value="<?= date('Y-m-d') ?>">
+                        <input type="datetime-local" class="form-control" name="order_date" id="orderDate"
+                            value="<?= date('Y-m-d H:i:s') ?>">
                     </div>
 
 
@@ -176,40 +176,41 @@
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Total</th>
+                                    <th>Custom Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="order-items">
                                 <tr>
                                     <td>
-                                        <select id="serviceSelect" name="item" class="form-select">
+                                        <select name="item[]" class="form-select serviceSelect">
                                             <option value="">Select Item</option>
                                             <?php foreach ($services as $service): ?>
-                                                <option value="<?= $service->id ?>"
-                                                    data-price="<?= $service->default_price ?>">
+                                                <option value="<?= $service->id ?>" data-name="<?= $service->name ?>" data-price="<?= $service->default_price ?>">
                                                     <?= $service->name ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
                                     <td>
-                                        <input id="qtyInput" name="qty" type="number" class="form-control"
-                                            placeholder="Qty" min="1">
+                                        <input name="qty[]" type="number" class="form-control qtyInput" placeholder="Qty" min="1">
+                                        <input name="service_name[]" type="hidden" class="form-control serviceName">
                                     </td>
                                     <td>
-                                        <input id="priceInput" name="price" type="number" class="form-control"
-                                            placeholder="Price" step="0.01" disabled>
+                                        <input name="price[]" type="number" class="form-control priceInput" placeholder="Price" step="0.01" readonly>
                                     </td>
                                     <td>
-                                        <input id="totalInput" type="number" class="form-control" placeholder="Total"
-                                            step="0.01" readonly>
+                                        <input type="number" class="form-control totalInput" placeholder="Total" step="0.01" readonly>
+                                    </td>
+                                    <td>
+                                        <input name="custom_price[]" type="number" class="form-control customPriceInput" placeholder="Custom price" step="0.01">
                                     </td>
                                 </tr>
-
-                                <!-- Tambahkan baris lain sesuai kebutuhan -->
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="addRow">+ Add Item</button>
                     </div>
                     <div class="text-end mb-3">
+                        <input type="hidden" name="total" id="totalAmountHidden">
                         <strong>Total Amount: $<span id="totalAmount">0.00</span></strong>
                     </div>
                 </div>
@@ -244,7 +245,6 @@
                         <div class="col-md-4">
                             <label class="form-label" for="paymentMethod">Payment Method</label>
                             <select class="form-select" id="paymentMethod" name="payment_method">
-                                <option selected disabled>Select method</option>
                                 <option value="cash">Cash</option>
                                 <option value="bank_transfer">Bank Transfer</option>
                                 <option value="card">Card</option>
@@ -273,22 +273,74 @@
     </div>
 </div>
 <script>
-    // contoh update total (bisa dikembangkan untuk kalkulasi dinamis)
-    const qtyInput = document.querySelector('input[placeholder="Qty"]');
-    const priceInput = document.querySelector('input[placeholder="Price"]');
-    const totalInput = document.querySelector('input[placeholder="Total"]');
-    const totalAmountSpan = document.getElementById('totalAmount');
+    const orderItems = document.getElementById("order-items");
+    const addRowBtn = document.getElementById("addRow");
+    const grandTotalInput = document.getElementById("grandTotalInput");
+    const totalAmountSpan = document.getElementById("totalAmount");
+    const totalAmountHidden = document.getElementById("totalAmountHidden");
 
-    function updateTotal() {
-        const qty = parseFloat(qtyInput.value) || 0;
-        const price = parseFloat(priceInput.value) || 0;
-        const total = qty * price;
-        totalInput.value = total.toFixed(2);
-        totalAmountSpan.textContent = total.toFixed(2);
+    // update per baris
+    function updateRowTotal(row) {
+        let qty = parseFloat(row.querySelector(".qtyInput").value);
+        if (isNaN(qty) || qty <= 0) {
+            qty = 1; // default ke 1 kalau kosong atau <=0
+        }
+
+        const price = parseFloat(row.querySelector(".priceInput").value) || 0;
+        const customPrice = parseFloat(row.querySelector(".customPriceInput").value) || 0;
+        const totalInput = row.querySelector(".totalInput");
+
+        let rowTotal = qty * price;
+        if (customPrice > 0) {
+            rowTotal = customPrice; // override pakai custom price
+        }
+
+        totalInput.value = rowTotal.toFixed(2);
+        updateGrandTotal();
     }
 
-    qtyInput.addEventListener('input', updateTotal);
-    priceInput.addEventListener('input', updateTotal);
 
+    // update grand total
+    function updateGrandTotal() {
+        let grandTotal = 0;
+        orderItems.querySelectorAll("tr").forEach(row => {
+            const total = parseFloat(row.querySelector(".totalInput").value) || 0;
+            grandTotal += total;
+        });
+        totalAmountSpan.textContent = grandTotal.toFixed(2);
+        totalAmountHidden.value = grandTotal.toFixed(2);
+    }
+
+    // binding event ke baris
+    function bindRowEvents(row) {
+        const serviceSelect = row.querySelector(".serviceSelect");
+        const qtyInput = row.querySelector(".qtyInput");
+        const priceInput = row.querySelector(".priceInput");
+        const customPriceInput = row.querySelector(".customPriceInput");
+        const serviceName = row.querySelector(".serviceName");
+
+        serviceSelect.addEventListener("change", function() {
+            const selected = this.options[this.selectedIndex];
+            priceInput.value = selected.dataset.price || 0;
+            serviceName.value = selected.dataset.name || '';
+            updateRowTotal(row);
+        });
+        qtyInput.addEventListener("input", () => updateRowTotal(row));
+        customPriceInput.addEventListener("input", () => updateRowTotal(row));
+    }
+
+    // add row
+    addRowBtn.addEventListener("click", () => {
+        const firstRow = orderItems.querySelector("tr");
+        const newRow = firstRow.cloneNode(true);
+        newRow.querySelectorAll("input").forEach(i => i.value = "");
+        newRow.querySelector(".serviceSelect").selectedIndex = 0;
+        orderItems.appendChild(newRow);
+        bindRowEvents(newRow);
+    });
+
+    // initial binding
+    orderItems.querySelectorAll("tr").forEach(row => bindRowEvents(row));
 </script>
+
 <?php include_once __DIR__ . '/../footer_view.php'; ?>

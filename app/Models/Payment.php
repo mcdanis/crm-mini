@@ -9,7 +9,13 @@ class Payment extends Model
 {
 
 	protected $fillable = [
-		'order_id', 'payment_date', 'amount', 'payment_method', 'reference', 'note', 'created_by',
+		'order_id',
+		'payment_date',
+		'amount',
+		'payment_method',
+		'reference',
+		'note',
+		'created_by',
 	];
 
 	protected $casts = [
@@ -26,4 +32,4 @@ class Payment extends Model
 	{
 		return $this->belongsTo(User::class, 'created_by');
 	}
-} 
+}

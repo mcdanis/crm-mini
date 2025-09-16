@@ -9,18 +9,17 @@ class OrderItem extends Model
 {
 
 	protected $fillable = [
-		'order_id', 'service_id', 'name', 'quantity', 'unit_price', 'discount', 'custom_price',
-	];
-
-	protected $casts = [
-		'quantity' => 'integer',
-		'unit_price' => 'decimal:2',
-		'discount' => 'decimal:2',
-		'custom_price' => 'decimal:2',
+		'order_id',
+		'service_id',
+		'name',
+		'quantity',
+		'unit_price',
+		'discount',
+		'custom_price',
 	];
 
 	public function order(): BelongsTo
 	{
 		return $this->belongsTo(Order::class, 'order_id');
 	}
-} 
+}

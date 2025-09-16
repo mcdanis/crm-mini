@@ -91,7 +91,6 @@ class CustomerController
             $customer = Customer::create([
                 'full_name' => $fullName,
                 'email' => $email,
-                'number' => $number,
                 'company_name' => $companyName,
                 'source' => $source,
                 'birthday' => $birthday,
@@ -158,9 +157,7 @@ class CustomerController
         ]);
     }
 
-    public function delete($id)
-    {
-    }
+    public function delete($id) {}
 
     public function searchForOrder()
     {

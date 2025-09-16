@@ -8,6 +8,9 @@ use App\Models\Tag;
 use App\Models\Service;
 use App\Helpers\ResponseHelper;
 use App\Helpers\ValidationHelper;
+use App\Services\OrderService;
+use Illuminate\Database\Capsule\Manager as DB;
+
 class OrderController
 {
     public function __construct()
@@ -35,6 +38,8 @@ class OrderController
     public function create()
     {
         try {
+            DB::beginTransaction();
+
             $errors = [];
 
             // Ambil semua request
@@ -51,6 +56,8 @@ class OrderController
             $state = $_POST['state'] ?? null;
             $postcode = $_POST['postcode'] ?? null;
             $note = $_POST['note'] ?? null;
+            $selectedCustomer = $_POST['selected_customer'] ?? null;
+            $item = $_POST['item'] ?? [];
 
             $orderStatus = $_POST['order_status'] ?? null;
             $bookedAt = $_POST['booked_at'] ?? null;
@@ -63,9 +70,9 @@ class OrderController
             // --------------------------------------------------
             // 0. Cek agar tidak kosong total
             // --------------------------------------------------
-            if (!$customerType) {
+            if ($customerType) {
                 if (empty($fullName) && empty($phone) && empty($email)) {
-                    $errors[] = 'At least one of Full Name, Phone, or Email must be filled or choose existing customer';
+                    $errors[] = 'Please select existing customer or choose new customer';
                 }
             }
 
@@ -136,6 +143,13 @@ class OrderController
             }
 
             // --------------------------------------------------
+            // 5. validate item
+            // --------------------------------------------------
+            if (count($item) < 1) {
+                $errors[] = 'Please select service';
+            }
+
+            // --------------------------------------------------
             // Return error jika ada
             // --------------------------------------------------
             if (!empty($errors)) {
@@ -144,12 +158,12 @@ class OrderController
                 die;
             }
 
-            // Jika lolos validasi
-            echo ResponseHelper::jsonSuccess('Validation passed!');
+            $result = (new OrderService)->proccessOrder($_POST);
+            DB::commit();
+            echo ResponseHelper::jsonSuccess($result);
         } catch (\Throwable $th) {
+            DB::rollBack();
             echo ResponseHelper::jsonFailed('Ops, something went wrong! ' . $th->getMessage());
         }
     }
-
-
 }

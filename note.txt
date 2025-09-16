@@ -64,3 +64,23 @@ itu garis besar aplikasi crm saya, tolong buatkan desain tabel dalam bentuk kode
 sebelum menjawab jika ada pertanyaan atau konfirmasi fitur atau hal apapun silahkan, supaya desain tabel lebih bagus. jika anda ingin menyarankan juga silahakan.
 
 note: aplikasi ini target saya umkm bisnis di local dan luar negeri, jadi pastikan nama field kolom tabel menggunakan bahasa inggris
+
+
+
+- onote order feature
+    ORDER TABLE
+        total_paid -> nullable
+        add 
+            payment_method
+            references
+            payment_note
+    ORDER  ITEMS
+		add 
+            'order_id', 
+            'service_id', 
+            'name', 
+            'quantity', 
+            'unit_price', 
+            'discount', 
+            'custom_price',
+

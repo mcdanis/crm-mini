@@ -16,7 +16,7 @@ return new class {
 				$table->date('order_date');
 				$table->text('note')->nullable();
 				$table->decimal('total_amount', 14, 2)->default(0.00);
-				$table->decimal('total_paid', 14, 2)->default(0.00);
+				$table->decimal('total_paid', 14, 2)->nullable()->default(0.00);
 				$table->dateTime('scheduled_at')->nullable();
 				$table->dateTime('deleted_at')->nullable();
 				$table->unsignedBigInteger('created_by')->nullable();
@@ -34,8 +34,8 @@ return new class {
 		$schema = Capsule::schema();
 
 		if ($schema->hasTable('orders')) {
-			
+
 			$schema->drop('orders');
 		}
 	}
-}; 
+};
