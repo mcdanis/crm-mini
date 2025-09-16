@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Middleware\RouteMiddleware;
-use App\Service\CustomerService;
+use App\Services\CustomerService;
 use App\Helpers\ResponseHelper;
 use App\Models\Tag;
 use App\Models\Customer;
@@ -33,7 +33,7 @@ class CustomerController
             $email = $_POST['email'];
             $number = $_POST['phone'];
             $companyName = $_POST['company_name'];
-            $source = $_POST['source'];
+            $source = $_POST['source'] ?? null;
             $birthday = !empty($_POST['birthday']) ? $_POST['birthday'] : null;
             $tags = $_POST['tag_id'] ?? [];
             $address = $_POST['address'];
@@ -53,7 +53,7 @@ class CustomerController
             if (!empty($errors)) {
                 $msgRequired = '';
                 foreach ($errors as $error) {
-                    $msgRequired .= ResponseHelper::failed($error);
+                    $msgRequired .= $error . '<br>';
                 }
                 echo ResponseHelper::jsonFailed($msgRequired);
                 die;
@@ -122,7 +122,7 @@ class CustomerController
     public function index()
     {
         $perPage = 10;
-        $lastId = isset($_GET['last_id']) ? (int)$_GET['last_id'] : null;
+        $lastId = isset($_GET['last_id']) ? (int) $_GET['last_id'] : null;
 
         $query = Customer::orderBy('id', 'desc');
 
@@ -158,5 +158,24 @@ class CustomerController
         ]);
     }
 
-    public function delete($id) {}
+    public function delete($id)
+    {
+    }
+
+    public function searchForOrder()
+    {
+        try {
+            echo json_encode(
+                [
+                    'status' => 'success',
+                    'data' => (new CustomerService)->searchCustomerForOrder($_GET['q'])
+                ]
+            );
+        } catch (\Throwable $th) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
 }

@@ -8,6 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="/../../public/assets/js/ajax.js"></script>
 <script src="/../../public/assets/js/app.js"></script>
+<!-- <script src="/../../public/assets/js/vanila.js"></script>
+<script src="/../../public/assets/js/jquery.js"></script> -->
 
 </body>
 

@@ -53,9 +53,13 @@ $router->get('api/service/delete/{id}', function ($id) {
     (new ServiceController)->deleteService($id);
 });
 
+// API order
+$router->post('api/order/create', 'OrderController@create');
+
 // API customer
 $router->post('api/customer/create', 'CustomerController@create');
 $router->get('api/customer/delete/{id}', 'CustomerController@delete');
+$router->get('api/customer/search-for-order', 'CustomerController@searchForOrder');
 
 
 // 

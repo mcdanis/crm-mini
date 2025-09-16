@@ -240,3 +240,29 @@ function ajaxGet(url, msg, resultId = null, refreshFormId = null) {
     })
     .catch((error) => console.error("Error:", error));
 }
+
+function ajaxGetJson(url, msg = null, resultId = null, refreshFormId = null) {
+  if (msg) {
+    const confirmMessage = confirm(msg);
+    if (!confirmMessage) return;
+  }
+
+  fetch(url, { method: "GET" })
+    .then((response) => response.json())
+    .then((data) => {
+      if (resultId) {
+        const result = document.getElementById(resultId);
+        if (result) result.innerHTML = data.data;
+        if (window.initCustomerRadios) window.initCustomerRadios(resultId);
+      }
+      if (refreshFormId) {
+        const refreshForm = document.getElementById(refreshFormId);
+        if (refreshForm) {
+          refreshForm.dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          );
+        }
+      }
+    })
+    .catch((error) => console.error("Error:", error));
+}
