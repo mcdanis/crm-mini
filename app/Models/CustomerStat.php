@@ -13,19 +13,17 @@ class CustomerStat extends Model
 	protected $keyType = 'int';
 
 	protected $fillable = [
-		'customer_id', 'total_orders', 'total_spent', 'last_order_at', 'avg_order_value', 'retention_score', 'updated_at',
-	];
-
-	protected $casts = [
-		'total_orders' => 'integer',
-		'total_spent' => 'decimal:2',
-		'avg_order_value' => 'decimal:2',
-		'retention_score' => 'float',
-		'last_order_at' => 'datetime',
+		'customer_id',
+		'total_orders',
+		'total_spent',
+		'last_order_at',
+		'avg_order_value',
+		'retention_score',
+		'updated_at',
 	];
 
 	public function customer(): BelongsTo
 	{
 		return $this->belongsTo(Customer::class, 'customer_id');
 	}
-} 
+}

@@ -10,9 +10,9 @@
     </div>
 
     <div class="dashboard-section">
-        <div class="table-responsive" style="max-width: 1300px; overflow-x: auto;">
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle table-bordered table-striped">
+                <thead class="table-light text-nowrap">
                     <tr>
                         <th>#</th>
                         <th><?= t('full_name') ?></th>
@@ -21,44 +21,64 @@
                         <th>Company</th>
                         <th>Source</th>
                         <th>Address</th>
-                        <th>Number of Orders</th>
-                        <th>Total Order Value</th>
+                        <th class="text-end">Number of Orders</th>
+                        <th class="text-end">Total Order Value</th>
                         <th>Last Order</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center" style="min-width: 150px">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="customer-list">
-                    <?php
-                    $no = 1;
-                    foreach ($customers as $c):
-                    ?>
+                    <?php $no = 1;
+                    foreach ($customers as $c): ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $c->full_name ?></td>
-                            <td><?= $c->email ?></td>
+                            <td class="text-truncate" style="max-width: 200px;" title="<?= $c->full_name ?>">
+                                <?= $c->full_name ?>
+                            </td>
+                            <td class="text-truncate" style="max-width: 200px;" title="<?= $c->email ?>">
+                                <?= $c->email ?>
+                            </td>
                             <td><?= $c->phone ?></td>
                             <td><?= $c->company_name ?></td>
                             <td><?= $c->source ?></td>
-                            <td><?= $c->address ?></td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td class="text-truncate" style="max-width: 250px;" title="<?= $c->address ?>">
+                                <?= $c->address ?>
+                            </td>
+                            <td class="text-end">-</td>
+                            <td class="text-end">-</td>
                             <td>-</td>
                             <td class="text-center">
-                                <a href="/customer/detail/<?= $c->id ?>" class="btn btn-sm btn-outline-primary me-1"><i
-                                        class="bi bi-eye"></i></a>
-                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+                                <a href="/customer/detail/<?= $c->id ?>"
+                                    class="btn btn-sm btn-outline-primary me-1"
+                                    title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="text-center">
-                <?php if (!empty($customers)): ?>
-                    <?php $lastCustomer = $customers[count($customers) - 1]; ?>
-                    <button id="load-more" class="btn btn-c-primary btn-sm px-5" data-last-id="<?= $lastCustomer->id ?>">Load More</button>
-                <?php endif; ?>
-            </div>
+
+            <?php if ($customers->isNotEmpty()): ?>
+                <?php $lastCustomer = $customers->last(); ?>
+                <div class="text-center my-3">
+                    <button id="load-more"
+                        class="btn btn-c-primary btn-sm px-5"
+                        data-last-id="<?= htmlspecialchars($lastCustomer->id, ENT_QUOTES) ?>">
+                        Load More
+                    </button>
+                </div>
+            <?php else: ?>
+                <div class="text-center">
+                    <i>No data found</i>
+                </div>
+            <?php endif; ?>
+
         </div>
+
     </div>
 </div>
 <script>

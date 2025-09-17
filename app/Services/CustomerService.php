@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Customer;
+use App\Models\CustomerTag;
 
 class CustomerService
 {
@@ -28,7 +29,7 @@ class CustomerService
                             <span>' . htmlspecialchars($customer->full_name) . '</span>
                         </label>
 
-                        <div class="customer-detail card shadow-sm p-3 mt-2 d-none">
+                        <div class="customer-detail card shadow-sm p-3 m-3 d-none">
                             <h6 class="card-title mb-2">' . htmlspecialchars($customer->full_name) . '</h6>
                             <p class="mb-1"><strong>Email:</strong> ' . htmlspecialchars($customer->email ?? '-') . '</p>
                             <p class="mb-1"><strong>Phone:</strong> ' . htmlspecialchars($customer->phone ?? '-') . '</p>
@@ -42,9 +43,20 @@ class CustomerService
         } else {
             $html .= '<p class="text-muted">No customers found.</p>';
         }
-
-
         return $html;
+    }
 
+    public function createTag($tags, $id)
+    {
+        $tagDatas = [];
+        if (count($tags) > 0) {
+            foreach ($tags as $tag) {
+                $tagDatas[] = [
+                    'customer_id' => $id,
+                    'tag_id' => $tag,
+                ];
+            }
+            CustomerTag::insert($tagDatas);
+        }
     }
 }

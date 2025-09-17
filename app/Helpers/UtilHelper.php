@@ -52,4 +52,22 @@ class UtilHelper
 
         return $upper ? mb_strtoupper($result, 'UTF-8') : mb_strtolower($result, 'UTF-8');
     }
+
+    public static function log($message, $level = 'INFO')
+    {
+        // path file log
+        $logFile = __DIR__ . '/../storage/logs/app.log';
+
+        // pastikan folder logs ada
+        if (!file_exists(dirname($logFile))) {
+            mkdir(dirname($logFile), 0777, true);
+        }
+
+        // format log: [tanggal waktu] level: pesan
+        $date = date('Y-m-d H:i:s');
+        $formattedMessage = "[$date] $level: $message" . PHP_EOL;
+
+        // simpan ke file
+        file_put_contents($logFile, $formattedMessage, FILE_APPEND);
+    }
 }

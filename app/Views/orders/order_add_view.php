@@ -160,8 +160,6 @@
                         <input type="datetime-local" class="form-control" name="order_date" id="orderDate"
                             value="<?= date('Y-m-d H:i:s') ?>">
                     </div>
-
-
                 </div>
 
                 <!-- Order Items -->
@@ -210,7 +208,7 @@
                         <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="addRow">+ Add Item</button>
                     </div>
                     <div class="text-end mb-3">
-                        <input type="hidden" name="total" id="totalAmountHidden">
+                        <input type="hidden" name="total" id="totalAmountHidden" value="0">
                         <strong>Total Amount: $<span id="totalAmount">0.00</span></strong>
                     </div>
                 </div>

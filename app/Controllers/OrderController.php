@@ -7,6 +7,7 @@ use App\Middleware\RouteMiddleware;
 use App\Models\Tag;
 use App\Models\Service;
 use App\Helpers\ResponseHelper;
+use App\Helpers\UtilHelper;
 use App\Helpers\ValidationHelper;
 use App\Services\OrderService;
 use Illuminate\Database\Capsule\Manager as DB;
@@ -17,6 +18,7 @@ class OrderController
     {
         RouteMiddleware::requireAuth();
     }
+
     public function add()
     {
         $tags = Tag::all();
@@ -74,7 +76,13 @@ class OrderController
                 if (empty($fullName) && empty($phone) && empty($email)) {
                     $errors[] = 'Please select existing customer or choose new customer';
                 }
+            } else {
+                if (!isset($selectedCustomer)) {
+                    $errors[] = 'Please select existing customer';
+                }
             }
+
+
 
             // --------------------------------------------------
             // 1. Validasi Customer Info (jika checkbox dicentang)
@@ -145,9 +153,14 @@ class OrderController
             // --------------------------------------------------
             // 5. validate item
             // --------------------------------------------------
+            $item = array_filter($item, function ($val) {
+                return trim($val) !== '';
+            });
+
             if (count($item) < 1) {
                 $errors[] = 'Please select service';
             }
+
 
             // --------------------------------------------------
             // Return error jika ada

@@ -41,9 +41,11 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   transform: translateX(5px);
 }
@@ -65,9 +67,11 @@ body {
 }
 
 .stat-card {
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
 }
 
@@ -117,9 +121,11 @@ body {
 
 .table th {
   border: none;
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   font-weight: 600;
 }
@@ -262,9 +268,11 @@ body {
 }
 
 .nav-tabs .nav-link.active {
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
 }
 
@@ -293,9 +301,11 @@ body {
 }
 
 .stat-card {
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   text-align: center;
   padding: 1.5rem;
@@ -494,9 +504,11 @@ body {
   height: 60px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   font-size: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -558,9 +570,11 @@ body {
 }
 
 .modal-header {
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   border-radius: 15px 15px 0 0;
 }
@@ -682,11 +696,11 @@ body {
   border-radius: 50%;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: var(--primary-color);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   transform: translateX(26px);
 }
 
@@ -695,9 +709,11 @@ input:checked+.slider:before {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(45deg,
-      var(--primary-color),
-      var(--secondary-color));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -729,3 +745,13 @@ input:checked+.slider:before {
 }
 
 /* end setting section */
+
+/* custom select 2 width */
+.select2-container .select2-search--inline .select2-search__field {
+  width: 100% !important;
+}
+
+.select2.select2-container {
+  width: 100% !important;
+}
+/* end custom select 2 width */

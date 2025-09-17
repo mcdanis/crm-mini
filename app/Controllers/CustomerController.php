@@ -8,7 +8,6 @@ use App\Services\CustomerService;
 use App\Helpers\ResponseHelper;
 use App\Models\Tag;
 use App\Models\Customer;
-use App\Models\CustomerTag;
 use App\Helpers\ValidationHelper;
 
 class CustomerController
@@ -102,16 +101,7 @@ class CustomerController
                 'phone' => $number,
             ]);
 
-            $tagDatas = [];
-            if (count($tags) > 0) {
-                foreach ($tags as $tag) {
-                    $tagDatas[] = [
-                        'customer_id' => $customer->id,
-                        'tag_id' => $tag,
-                    ];
-                }
-                CustomerTag::insert($tagDatas);
-            }
+            (new CustomerService)->createTag($tags, $customer->id);
             echo ResponseHelper::jsonSuccess('A new customer have been added!');
         } catch (\Throwable $th) {
             echo ResponseHelper::jsonFailed('Ops, something went wrong!' . $th->getMessage());
