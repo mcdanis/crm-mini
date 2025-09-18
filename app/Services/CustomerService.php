@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\UtilHelper;
 use App\Models\Customer;
 use App\Models\CustomerTag;
 
@@ -56,6 +57,7 @@ class CustomerService
                     'tag_id' => $tag,
                 ];
             }
+
             CustomerTag::insert($tagDatas);
         }
     }

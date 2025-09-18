@@ -66,7 +66,6 @@ class OrderService
                 $discount = $customPrice - $price;
             }
 
-
             $dataItems[] = [
                 'order_id'    => $orderId,
                 'service_id'  => $data['item'][$i],
@@ -125,7 +124,7 @@ class OrderService
             'email' => $data['email'],
             'company_name' => $data['company_name'],
             'source' => $data['source'],
-            'birthday' => $data['birthday'],
+            'birthday' => !empty($data['birthday']) ? $data['birthday'] : '9999-12-12',
             'address' => $data['address'],
             'suburb' => $data['suburb'],
             'state' => $data['state'],
@@ -136,7 +135,9 @@ class OrderService
         ]);
 
         // not work
-        (new CustomerService)->createTag($data['tag_id'], $customer->id);
+        if (isset($data['tag_id'])) {
+            (new CustomerService)->createTag($data['tag_id'], $customer->id);
+        }
         $this->updateCustomerStat($data, $customer->id);
     }
 }
