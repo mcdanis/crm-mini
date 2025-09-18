@@ -82,8 +82,6 @@ class OrderController
                 }
             }
 
-
-
             // --------------------------------------------------
             // 1. Validasi Customer Info (jika checkbox dicentang)
             // --------------------------------------------------
@@ -148,6 +146,36 @@ class OrderController
             }
             if (!empty($reference) && !ValidationHelper::alphaNum($reference)) {
                 $errors[] = 'Invalid payment reference';
+            }
+
+            $totalOrder = floatval($_POST['total'] ?? 0);
+            $amountPaid = floatval($amountPaid ?? 0);
+            $orderStatus = $orderStatus ?? '';
+            $paymentNote = trim($paymentNote ?? '');
+
+            // 4.1. Jika Amount Paid = 0
+            if ($amountPaid == 0 && in_array($orderStatus, ['confirmed', 'completed'])) {
+                $errors[] = 'Order cannot be Confirmed/Completed without payment.';
+            }
+
+            // 4.2. Jika Amount Paid < Total Order (partial)
+            if ($amountPaid > 0 && $amountPaid < $totalOrder && in_array($orderStatus, ['completed', 'cancelled'])) {
+                $errors[] = 'Order with partial payment cannot be Completed/Cancelled without refund.';
+            }
+
+            // 4.3. Jika Amount Paid >= Total Order
+            if ($amountPaid >= $totalOrder && $orderStatus === 'cancelled') {
+                $errors[] = 'Cancelled order cannot have full payment.';
+            }
+
+            // 4.4. Jika Status = Cancelled tapi ada pembayaran
+            if ($orderStatus === 'cancelled' && $amountPaid > 0 && empty($paymentNote)) {
+                $errors[] = 'Please provide a refund note when cancelling a paid order.';
+            }
+
+            // 4.5. Jika Status = Completed tapi belum lunas
+            if ($orderStatus === 'completed' && $amountPaid < $totalOrder) {
+                $errors[] = 'Completed order must be fully paid.';
             }
 
             // --------------------------------------------------

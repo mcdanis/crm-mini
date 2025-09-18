@@ -212,22 +212,7 @@
                         <strong>Total Amount: $<span id="totalAmount">0.00</span></strong>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3 mb-3">
-                        <label class="form-label" for="orderStatus">Order Status</label>
-                        <select class="form-select" id="orderStatus" name="order_status">
-                            <option value="confirmed" selected>Confirmed</option>
-                            <option value="booked">Booked</option>
-                            <option value="in_progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                            <option value="cancelled">Cancelled</option>
-                        </select>
-                    </div>
-                    <div class="col-3 d-none" id="booked-at">
-                        <label class="form-label" for="orderStatus">Booked At</label>
-                        <input type="datetime-local" class="form-control" name="booked_at" id="bookedAt">
-                    </div>
-                </div>
+
                 <!-- Payment Section -->
                 <div class="form-section">
                     <hr>
@@ -256,7 +241,23 @@
                             <label class="form-label" for="paymentNote">Payment Note</label>
                             <textarea class="form-control" id="paymentNote" name="payment_note"></textarea>
                         </div>
-
+                        <div class="row mt-4">
+                            <hr>
+                            <div class="col-3 mb-3">
+                                <label class="form-label" for="orderStatus">Order Status</label>
+                                <select class="form-select" id="orderStatus" name="order_status">
+                                    <option value="confirmed" selected>Confirmed</option>
+                                    <option value="booked">Booked</option>
+                                    <option value="in_progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                            <div class="col-3 d-none" id="booked-at">
+                                <label class="form-label" for="orderStatus">Booked At</label>
+                                <input type="datetime-local" class="form-control" name="booked_at" id="bookedAt">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
